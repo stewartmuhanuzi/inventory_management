@@ -30,9 +30,9 @@
                     </a>
                   </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('brands.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <p>Brands</p>
                 </a>
               </li>
             </ul>
