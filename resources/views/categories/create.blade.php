@@ -28,8 +28,6 @@
                       <h5 class="card-title">Create Category</h5> <br>
 
                       {{-- <form method="post" action=> --}}
-                      
-                      </form>
                       <form method="post" role="form" action="{{route('categories.store')}}">
                         {{ csrf_field() }}
                         <div class="card-body">

@@ -14,7 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderby('created_at', "DESC")->get();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -42,9 +43,8 @@ class CategoriesController extends Controller
         // $category->name =$request->name;
         // $category->save();
         Category::create($this->validateCategoryName())->get();
-        flash('Category Created Successfully')->success();
+        flash('Category Created Successfully')->success();//Laracast Flash Method to display notifications
         return redirect()->back();
-
 
     }
 
@@ -74,7 +74,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrfail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -86,7 +87,12 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category::whereId($id)->update($this->validateCategoryName());
+        $category->save();
+        flash('Category Updated Successfully')->success();
+        return redirect()->route('categories.index');
     }
 
     /**
