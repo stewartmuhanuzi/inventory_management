@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandsController extends Controller
@@ -13,7 +14,8 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        return view('brands.index');
+        $brands = Brand::orderby('created_at', "DESC")->get();
+        return view('brands.index', compact('brands'));
     }
 
     /**
@@ -23,7 +25,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        //
+        return view('brands.create');
     }
 
     /**
@@ -34,7 +36,18 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Brand::create($this->ValidateBrandName())->get();
+        flash('Brand Created Successfully')->success();//Laracast Flash Method to display notifications
+        return redirect()->route('brands.index');
+
+    }
+
+    // Validate the brand name and the various parameters
+    public function ValidateBrandName()
+    {
+        return request()->validate([
+            'name'=>'required|min:2|max:50|unique:brands'
+        ]);
     }
 
     /**
@@ -56,7 +69,8 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = Brand::findOrfail($id);
+        return view('brands.edit', compact('brand'));
     }
 
     /**
@@ -68,7 +82,12 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+
+        $brand::whereId($id)->update($this->validateBrandName());
+        $brand->save();
+        flash('Brand Updated Successfully')->success();
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -79,6 +98,8 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand = Brand::findOrFail($id)->delete();
+        flash('Brand Deleted Successfully')->error();
+        return redirect()->route('brands.index');
     }
 }
