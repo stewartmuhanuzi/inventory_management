@@ -39,7 +39,14 @@
                                         <td>{{++$key}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="{{route('categories.edit', $category->id)}}">Edit</a>
+                                            <a class="btn btn-sm btn-info" href="{{route('categories.edit', $category->id)}}"><i class="fa fa-edit"></i>Edit</a>
+
+                                            <a class="btn btn-sm btn-danger sa-delete" href="javascript:;" data-form-id="category-delete{{$category->id}}"><i class="fa fa-trash"></i>Delete</a>
+                                            <form id="category-delete{{$category->id}}" action="{{route('categories.destroy', $category->id)}}" method="POST">
+                                                {{ csrf_field() }}
+                                                @method("DELETE")
+
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
