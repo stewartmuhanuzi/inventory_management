@@ -22,8 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/templates', function(){
-    return view('layouts.master');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('categories', CategoriesController::class);
 });
 
-Route::resource('categories', CategoriesController::class);

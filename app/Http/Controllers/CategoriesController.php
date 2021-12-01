@@ -105,7 +105,7 @@ class CategoriesController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        flash('Category Deleted {{$category->name}} Successfully')->error();
+        flash('Category Deleted Successfully')->error();
         return redirect()->route('categories.index');
     }
 }

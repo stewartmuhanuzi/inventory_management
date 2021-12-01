@@ -23,6 +23,9 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body">
                       <h5 class="card-title">List of Categories</h5> <br>
+                      <div>
+                        <a href="{{route('categories.create')}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Create Category</a><br><br>
+                      </div>
                       <table class="table table-bordered datatable">
                         <thead>
                             <tr>
