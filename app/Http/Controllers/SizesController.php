@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Size;
 
@@ -14,8 +15,8 @@ class SizesController extends Controller
      */
     public function index()
     {
-        $size = Size::orderBy('created_at', 'DESC')->get();
-        return view('sizes.index', compact('size'));
+        $sizes = Size::orderBy('created_at', 'DESC')->get();
+        return view('sizes.index', compact('sizes'));
     }
 
     /**
@@ -25,7 +26,7 @@ class SizesController extends Controller
      */
     public function create()
     {
-        return view('sizes.index');
+        return view('sizes.create');
     }
 
     /**
@@ -68,7 +69,8 @@ class SizesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $size = Size::findOrFail($id);
+        return view('sizes.edit', compact('size'));
     }
 
     /**
@@ -80,8 +82,14 @@ class SizesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $size = Size::findOrFail($id);
+
+        $size::whereId($id)->update($this->ValidateSize());
+        $size->save();
+        flash('Size Updated Successfully')->success();
+        return redirect()->route('sizes.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -91,6 +99,8 @@ class SizesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $size = Size::findOrFail($id)->delete();
+        flash('Size Deleted Successfully')->error();
+        return redirect()->route('sizes.index');
     }
 }

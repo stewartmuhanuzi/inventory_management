@@ -36,7 +36,7 @@
                                 </th>
                             </tr>
                             <tbody>
-                                @if ($sizes)
+                                @if($sizes)
                                     @foreach ($sizes as $key => $size)
                                     <tr>
                                         <td>{{++$key}}</td>

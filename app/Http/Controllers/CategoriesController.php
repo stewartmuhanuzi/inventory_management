@@ -36,12 +36,6 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name'=>'required|min:2|max:50|unique:categories'
-        // ]);
-        // $category = new Category();
-        // $category->name =$request->name;
-        // $category->save();
         Category::create($this->validateCategoryName())->get();
         flash('Category Created Successfully')->success();//Laracast Flash Method to display notifications
         return redirect()->back();

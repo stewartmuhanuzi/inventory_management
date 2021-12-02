@@ -25,18 +25,18 @@
             <div class="col-lg-6">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                      <h5 class="card-title">Edit Category</h5> <br>
+                      <h5 class="card-title">Edit Size</h5> <br>
 
                       {{-- <form method="post" action=> --}}
-                      <form method="post" role="form" action="{{route('categories.update', $category->id)}}">
+                      <form method="post" role="form" action="{{route('sizes.update', $size->id)}}">
                         {{ csrf_field() }}
                         @method('PUT')
                         <div class="card-body">
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="Enter Category Name" value="{{$category->name}}">
-                            @if ($errors->has('name'))
-                            <small class="form-text invalid-feedback">{{$errors->first('name')}}</small>
+                            <label for="exampleInputEmail1">Size</label>
+                            <input name="size" type="text" class="form-control" placeholder="Enter Size Name" value="{{$size->size}}">
+                            @if ($errors->has('size'))
+                            <small class="form-text invalid-feedback">{{$errors->first('size')}}</small>
                             @endif
                           </div>
                         <!-- /.card-body -->

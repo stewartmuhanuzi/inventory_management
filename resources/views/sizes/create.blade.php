@@ -33,9 +33,9 @@
                         <div class="card-body">
                           <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="Enter Size Name">
-                            @if ($errors->has('name'))
-                            <small class="form-text invalid-feedback">{{$errors->first('name')}}</small>
+                            <input name="size" type="text" class="form-control" placeholder="Enter Size Name">
+                            @if ($errors->has('size'))
+                            <small class="form-text invalid-feedback">{{$errors->first('size')}}</small>
                             @endif
                           </div>
                         <!-- /.card-body -->
